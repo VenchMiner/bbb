@@ -10,13 +10,13 @@ jobs:
         run: |
           $Password = ConvertTo-SecureString "Password123" -AsPlainText -Force
           New-LocalUser -Name "Administrator" -Password $Password -FullName "Full Name" -Description "Description"
-          
+
           Add-LocalGroupMember -Group "Administrators" -Member "Administrator"
-          
+
           Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server" -Name "fDenyTSConnections" -Value 0
-          
+
           Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
-          
+
           Set-ItemProperty -Path "HKLM:\System\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
 
       - name: Checkout Code
@@ -40,7 +40,7 @@ jobs:
       - name: Authenticate Ngrok
         env:
           NGROK_AUTHTOKEN: ${{ secrets.NGROK_AUTHTOKEN }}
-        run: ngrok config add-authtoken 2kefJY1az2vD2FySR5SfWDzAXfQ_3aUCWcrCBQoUR3djN2Se8
+        run: ngrok config add-authtoken 2p2J78cuTVvrpbN2uJP4lWooiQa_6Dv4s2ptsgqxpuALnhKXz
 
       - name: Run Ngrok with Debugging
         shell: cmd
